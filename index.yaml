@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Accounts-GitHub
+  title: Accounts-GitHub API
   description: >-
     Information about organization and individual accounts can be accessed with
     the Liink Accounts API.
