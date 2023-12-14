@@ -64,7 +64,7 @@ servers:
   - url: https://2b8dbafd-d917-44a5-a99c-3826f58499d7.mock.pstmn.io
 paths:
   
-  /accounts/{accountNumber}/statement/:
+  /accounts/{accountNumber}/statements/:
     get:
       tags:
         - Statement
