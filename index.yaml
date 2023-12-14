@@ -1,0 +1,796 @@
+openapi: 3.0.3
+info:
+  title: Accounts-GitHub
+  description: >-
+    Information about organization and individual accounts can be accessed with
+    the Liink Accounts API.
+
+
+    <img
+    src="https://content.pstmn.io/39401055-ad5f-4790-bea9-83bd4bce6cb0/YWNjb3VudGdpcGh5LmdpZg=="
+    width="172" height="189">
+
+
+    ### Account Statements
+
+
+    Account statement endpoints allow you to query statements at any point in
+    the duration of the account's existence.
+
+
+    Account statements pull all of the needed information when giving a user an
+    overview of their account history.
+
+
+    ### Account Creation
+
+
+    A new account can be created on behalf of a customer if all required
+    information is included. Please see the request documentaiton for more
+    information on this.
+
+
+    ### Account Overview
+
+
+    Account overview gives information about an account at the current state.
+    For historical information, please use the Account Statements endpoints.
+
+
+    ## Authorization
+
+
+    This collection uses OAuth2.0 and requires you to have a registered
+    application on the Lynk Hub before using the API.
+
+
+    After your app has been approved, paste your clientId, token, and app values
+    into the `Staging` environment. There is a collection-level script that will
+    check to see if your refresh token is still valid, and send a refresh
+    request if it is found to be expired, so that your requests will always be
+    up to date.
+
+
+    _**⚠️ This service should be used in accordance with our Prohibited and
+    Restricted Activities guidelines and is subject to standard rate limiting.
+    Please thoroghly review the terms before implementing into your service.**_
+  version: 1.0.0
+  contact: {}
+  x-source-collection: 23889826-bfd07b05-f2f2-4b06-aed5-1d6da0d2fe0a
+  x-postman-apiid: 77410349-b62f-4ca4-b238-ac30a6b4ffb3
+  x-postman-schemaid: e8c77c3e-32e3-4b08-b93a-4914ee239744
+  x-linked-collection: 23889826-d3699f37-2edc-4691-a63b-a00363d61d80
+servers:
+  - url: https://2b8dbafd-d917-44a5-a99c-3826f58499d7.mock.pstmn.io
+paths:
+  
+  /accounts/{accountNumber}/statement/:
+    get:
+      tags:
+        - Statement
+      summary: Statement
+      description: >-
+        Gets a statemet for a given `accountNumber.`
+
+
+        Also contains a visualization like the one pictured below. After sending
+        a request, click the "visualize" option in the response pane to see
+        transaction data in a searchable, sortable table.
+
+
+        <img
+        src="https://content.pstmn.io/dad125f7-d951-4050-8e35-e8358510001c/dGFibGVWaXN1YWxpemVyTHluay5naWY="
+        alt="">
+      operationId: statement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from:
+                  type: string
+                  example: Tue Jun 13 2023 16:58:06 GMT-0500 (Central Daylight Time)
+                to:
+                  type: string
+                  example: Tue Nov 21 2023 01:50:26 GMT-0600 (Central Standard Time)
+            examples:
+              Statement:
+                value:
+                  from: Tue Jun 13 2023 16:58:06 GMT-0500 (Central Daylight Time)
+                  to: Tue Nov 21 2023 01:50:26 GMT-0600 (Central Standard Time)
+      responses:
+        '200':
+          description: Successful Request
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: close
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Date:
+              schema:
+                type: string
+                example: Mon, 14 Jun 2021 14:30:25 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"96-S/5iQ2y1qqIInh5BwoPc+chvDJU"
+            Server:
+              schema:
+                type: string
+                example: nginx
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                example: '120'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                example: '119'
+            X-RateLimit-Reset:
+              schema:
+                type: string
+                example: '1623681083'
+            x-srv-span:
+              schema:
+                type: string
+                example: v=1;s=210e5b055e5bd71e
+            x-srv-trace:
+              schema:
+                type: string
+                example: v=1;t=d33d68b932344fce
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: object
+                    properties:
+                      closing:
+                        type: number
+                        example: 590.83
+                      opening:
+                        type: number
+                        example: 510.03
+                  money:
+                    type: object
+                    properties:
+                      in:
+                        type: number
+                        example: 584.24
+                      out:
+                        type: number
+                        example: 176.52
+                  period:
+                    type: object
+                    properties:
+                      from:
+                        type: string
+                        example: >-
+                          Tue Apr 04 2023 00:40:40 GMT-0500 (Central Daylight
+                          Time)
+                      to:
+                        type: string
+                        example: >-
+                          Mon Nov 20 2023 10:46:38 GMT-0600 (Central Standard
+                          Time)
+                  transactions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        amount:
+                          type: number
+                          example: 558.03
+                        balance:
+                          type: number
+                          example: 390.8
+                        date:
+                          type: string
+                          example: >-
+                            Mon Dec 04 2023 23:39:47 GMT+0000 (Coordinated
+                            Universal Time)
+                        description:
+                          type: string
+                          example: Parisian - Kuvalis
+                        type:
+                          type: string
+                          example: invoice
+                    example:
+                      - amount: 558.03
+                        balance: 390.8
+                        date: >-
+                          Mon Dec 04 2023 23:39:47 GMT+0000 (Coordinated
+                          Universal Time)
+                        description: Parisian - Kuvalis
+                        type: invoice
+                      - amount: 138.62
+                        balance: 142.39
+                        date: >-
+                          Mon Nov 20 2023 17:17:55 GMT-0600 (Central Standard
+                          Time)
+                        description: Smith - Schultz
+                        type: payment
+                      - amount: 831.45
+                        balance: 777.88
+                        date: >-
+                          Tue Nov 21 2023 02:14:23 GMT-0600 (Central Standard
+                          Time)
+                        description: Yundt Inc
+                        type: invoice
+                      - amount: 251.92
+                        balance: 877.21
+                        date: >-
+                          Mon Nov 20 2023 19:50:27 GMT-0600 (Central Standard
+                          Time)
+                        description: Koss - Walter
+                        type: withdrawal
+                      - amount: 13.83
+                        balance: 152.16
+                        date: >-
+                          Mon Nov 20 2023 21:48:38 GMT-0600 (Central Standard
+                          Time)
+                        description: Johnston - Ziemann
+                        type: invoice
+                      - amount: 253.22
+                        balance: 401.14
+                        date: >-
+                          Mon Nov 20 2023 20:19:01 GMT-0600 (Central Standard
+                          Time)
+                        description: Yost and Sons
+                        type: withdrawal
+                      - amount: 538.64
+                        balance: 223.11
+                        date: >-
+                          Mon Nov 20 2023 22:24:35 GMT-0600 (Central Standard
+                          Time)
+                        description: Wolff - Franecki
+                        type: payment
+                      - amount: 125.08
+                        balance: 953.3
+                        date: >-
+                          Tue Nov 21 2023 02:26:54 GMT-0600 (Central Standard
+                          Time)
+                        description: Walker - Doyle
+                        type: deposit
+                      - amount: 510.8
+                        balance: 484.32
+                        date: >-
+                          Mon Nov 20 2023 10:23:16 GMT-0600 (Central Standard
+                          Time)
+                        description: Kuhic LLC
+                        type: withdrawal
+                      - amount: 105.91
+                        balance: 120.92
+                        date: >-
+                          Mon Nov 20 2023 13:42:18 GMT-0600 (Central Standard
+                          Time)
+                        description: Graham and Sons
+                        type: invoice
+              examples:
+                Successful Request:
+                  value:
+                    balance:
+                      closing: 590.83
+                      opening: 510.03
+                    money:
+                      in: 584.24
+                      out: 176.52
+                    period:
+                      from: >-
+                        Tue Apr 04 2023 00:40:40 GMT-0500 (Central Daylight
+                        Time)
+                      to: >-
+                        Mon Nov 20 2023 10:46:38 GMT-0600 (Central Standard
+                        Time)
+                    transactions:
+                      - amount: 558.03
+                        balance: 390.8
+                        date: >-
+                          Mon Dec 04 2023 23:39:47 GMT+0000 (Coordinated
+                          Universal Time)
+                        description: Parisian - Kuvalis
+                        type: invoice
+                      - amount: 138.62
+                        balance: 142.39
+                        date: >-
+                          Mon Nov 20 2023 17:17:55 GMT-0600 (Central Standard
+                          Time)
+                        description: Smith - Schultz
+                        type: payment
+                      - amount: 831.45
+                        balance: 777.88
+                        date: >-
+                          Tue Nov 21 2023 02:14:23 GMT-0600 (Central Standard
+                          Time)
+                        description: Yundt Inc
+                        type: invoice
+                      - amount: 251.92
+                        balance: 877.21
+                        date: >-
+                          Mon Nov 20 2023 19:50:27 GMT-0600 (Central Standard
+                          Time)
+                        description: Koss - Walter
+                        type: withdrawal
+                      - amount: 13.83
+                        balance: 152.16
+                        date: >-
+                          Mon Nov 20 2023 21:48:38 GMT-0600 (Central Standard
+                          Time)
+                        description: Johnston - Ziemann
+                        type: invoice
+                      - amount: 253.22
+                        balance: 401.14
+                        date: >-
+                          Mon Nov 20 2023 20:19:01 GMT-0600 (Central Standard
+                          Time)
+                        description: Yost and Sons
+                        type: withdrawal
+                      - amount: 538.64
+                        balance: 223.11
+                        date: >-
+                          Mon Nov 20 2023 22:24:35 GMT-0600 (Central Standard
+                          Time)
+                        description: Wolff - Franecki
+                        type: payment
+                      - amount: 125.08
+                        balance: 953.3
+                        date: >-
+                          Tue Nov 21 2023 02:26:54 GMT-0600 (Central Standard
+                          Time)
+                        description: Walker - Doyle
+                        type: deposit
+                      - amount: 510.8
+                        balance: 484.32
+                        date: >-
+                          Mon Nov 20 2023 10:23:16 GMT-0600 (Central Standard
+                          Time)
+                        description: Kuhic LLC
+                        type: withdrawal
+                      - amount: 105.91
+                        balance: 120.92
+                        date: >-
+                          Mon Nov 20 2023 13:42:18 GMT-0600 (Central Standard
+                          Time)
+                        description: Graham and Sons
+                        type: invoice
+    parameters:
+      - name: accountNumber
+        in: path
+        required: true
+        schema:
+          type: string
+          example: bf537faa-61f4-11ed-9b6a-0242ac120002
+        description: >-
+          (REQIURED) `String` / Specify the account number for the statement.
+          The account must already be created and have been active for at least
+          24 hours.
+  /accounts/{accountNumber}/statement/latest/:
+    get:
+      tags:
+        - Statement
+      summary: Latest
+      description: Latest
+      operationId: latest
+      responses:
+        '200':
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: object
+                    properties:
+                      closing:
+                        type: number
+                        example: 975.86
+                      opening:
+                        type: number
+                        example: 876.08
+                  money:
+                    type: object
+                    properties:
+                      in:
+                        type: number
+                        example: 451.95
+                      out:
+                        type: number
+                        example: 576.53
+                  period:
+                    type: object
+                    properties:
+                      from:
+                        type: string
+                        example: >-
+                          Fri May 19 2023 09:56:32 GMT-0500 (Central Daylight
+                          Time)
+                      to:
+                        type: string
+                        example: >-
+                          Mon Nov 20 2023 23:35:58 GMT-0600 (Central Standard
+                          Time)
+                  transactions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        amount:
+                          type: number
+                          example: 701.59
+                        balance:
+                          type: number
+                          example: 208.51
+                        date:
+                          type: string
+                          example: >-
+                            Tue Nov 21 2023 07:58:28 GMT-0600 (Central Standard
+                            Time)
+                        description:
+                          type: string
+                          example: Daugherty - Gerlach
+                        type:
+                          type: string
+                          example: deposit
+                    example:
+                      - amount: 701.59
+                        balance: 208.51
+                        date: >-
+                          Tue Nov 21 2023 07:58:28 GMT-0600 (Central Standard
+                          Time)
+                        description: Daugherty - Gerlach
+                        type: deposit
+                      - amount: 450.21
+                        balance: 916.32
+                        date: >-
+                          Mon Nov 20 2023 18:36:54 GMT-0600 (Central Standard
+                          Time)
+                        description: Thiel and Sons
+                        type: payment
+                      - amount: 880.53
+                        balance: 286.55
+                        date: >-
+                          Mon Nov 20 2023 12:34:44 GMT-0600 (Central Standard
+                          Time)
+                        description: Rice, Hagenes and Rosenbaum
+                        type: payment
+                      - amount: 416.59
+                        balance: 351.12
+                        date: >-
+                          Mon Nov 20 2023 14:52:50 GMT-0600 (Central Standard
+                          Time)
+                        description: Hessel Group
+                        type: deposit
+                      - amount: 337.38
+                        balance: 106.34
+                        date: >-
+                          Mon Nov 20 2023 19:35:57 GMT-0600 (Central Standard
+                          Time)
+                        description: Lehner - Ryan
+                        type: invoice
+                      - amount: 268.82
+                        balance: 854.99
+                        date: >-
+                          Mon Nov 20 2023 11:00:09 GMT-0600 (Central Standard
+                          Time)
+                        description: Wilkinson Inc
+                        type: invoice
+                      - amount: 608.43
+                        balance: 579.5
+                        date: >-
+                          Mon Nov 20 2023 10:27:54 GMT-0600 (Central Standard
+                          Time)
+                        description: Lebsack - Christiansen
+                        type: invoice
+                      - amount: 936.64
+                        balance: 524.08
+                        date: >-
+                          Tue Nov 21 2023 04:31:33 GMT-0600 (Central Standard
+                          Time)
+                        description: Nolan and Sons
+                        type: invoice
+                      - amount: 643.43
+                        balance: 362.76
+                        date: >-
+                          Tue Nov 21 2023 07:48:11 GMT-0600 (Central Standard
+                          Time)
+                        description: Pfannerstill - Macejkovic
+                        type: deposit
+                      - amount: 605.88
+                        balance: 203.69
+                        date: >-
+                          Tue Nov 21 2023 04:30:06 GMT-0600 (Central Standard
+                          Time)
+                        description: Dooley and Sons
+                        type: withdrawal
+              examples:
+                Successful Request:
+                  value:
+                    balance:
+                      closing: 975.86
+                      opening: 876.08
+                    money:
+                      in: 451.95
+                      out: 576.53
+                    period:
+                      from: >-
+                        Fri May 19 2023 09:56:32 GMT-0500 (Central Daylight
+                        Time)
+                      to: >-
+                        Mon Nov 20 2023 23:35:58 GMT-0600 (Central Standard
+                        Time)
+                    transactions:
+                      - amount: 701.59
+                        balance: 208.51
+                        date: >-
+                          Tue Nov 21 2023 07:58:28 GMT-0600 (Central Standard
+                          Time)
+                        description: Daugherty - Gerlach
+                        type: deposit
+                      - amount: 450.21
+                        balance: 916.32
+                        date: >-
+                          Mon Nov 20 2023 18:36:54 GMT-0600 (Central Standard
+                          Time)
+                        description: Thiel and Sons
+                        type: payment
+                      - amount: 880.53
+                        balance: 286.55
+                        date: >-
+                          Mon Nov 20 2023 12:34:44 GMT-0600 (Central Standard
+                          Time)
+                        description: Rice, Hagenes and Rosenbaum
+                        type: payment
+                      - amount: 416.59
+                        balance: 351.12
+                        date: >-
+                          Mon Nov 20 2023 14:52:50 GMT-0600 (Central Standard
+                          Time)
+                        description: Hessel Group
+                        type: deposit
+                      - amount: 337.38
+                        balance: 106.34
+                        date: >-
+                          Mon Nov 20 2023 19:35:57 GMT-0600 (Central Standard
+                          Time)
+                        description: Lehner - Ryan
+                        type: invoice
+                      - amount: 268.82
+                        balance: 854.99
+                        date: >-
+                          Mon Nov 20 2023 11:00:09 GMT-0600 (Central Standard
+                          Time)
+                        description: Wilkinson Inc
+                        type: invoice
+                      - amount: 608.43
+                        balance: 579.5
+                        date: >-
+                          Mon Nov 20 2023 10:27:54 GMT-0600 (Central Standard
+                          Time)
+                        description: Lebsack - Christiansen
+                        type: invoice
+                      - amount: 936.64
+                        balance: 524.08
+                        date: >-
+                          Tue Nov 21 2023 04:31:33 GMT-0600 (Central Standard
+                          Time)
+                        description: Nolan and Sons
+                        type: invoice
+                      - amount: 643.43
+                        balance: 362.76
+                        date: >-
+                          Tue Nov 21 2023 07:48:11 GMT-0600 (Central Standard
+                          Time)
+                        description: Pfannerstill - Macejkovic
+                        type: deposit
+                      - amount: 605.88
+                        balance: 203.69
+                        date: >-
+                          Tue Nov 21 2023 04:30:06 GMT-0600 (Central Standard
+                          Time)
+                        description: Dooley and Sons
+                        type: withdrawal
+    parameters:
+      - name: accountNumber
+        in: path
+        required: true
+        schema:
+          type: string
+          example: bf537faa-61f4-11ed-9b6a-0242ac120002
+  /accounts/{accountNumber}/overview:
+    get:
+      summary: Overview
+      description: Overview
+      operationId: overview
+      responses:
+        '200':
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: object
+                    properties:
+                      closing:
+                        type: number
+                        example: 656.45
+                      opening:
+                        type: number
+                        example: 792.09
+                  money:
+                    type: object
+                    properties:
+                      in:
+                        type: number
+                        example: 714.96
+                      out:
+                        type: number
+                        example: 211.77
+                  period:
+                    type: object
+                    properties:
+                      from:
+                        type: string
+                        example: >-
+                          Mon Aug 21 2023 11:22:27 GMT-0500 (Central Daylight
+                          Time)
+                      to:
+                        type: string
+                        example: >-
+                          Tue Nov 21 2023 02:26:20 GMT-0600 (Central Standard
+                          Time)
+              examples:
+                Successful Request:
+                  value:
+                    balance:
+                      closing: 656.45
+                      opening: 792.09
+                    money:
+                      in: 714.96
+                      out: 211.77
+                    period:
+                      from: >-
+                        Mon Aug 21 2023 11:22:27 GMT-0500 (Central Daylight
+                        Time)
+                      to: >-
+                        Tue Nov 21 2023 02:26:20 GMT-0600 (Central Standard
+                        Time)
+    parameters:
+      - name: accountNumber
+        in: path
+        required: true
+        schema:
+          type: string
+          example: eu Lorem
+        description: (Required) The ID of the account you're querying.
+  /accounts/{customerId}:
+    get:
+      summary: Accounts by customer ID
+      description: >-
+        Gets an account by the customer ID.
+
+
+        Upon a successful request, a list of the account IDs associated with the
+        customer will be returned.
+      operationId: accountsByCustomerId
+      responses:
+        '200':
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountIdList:
+                    type: array
+                    items:
+                      type: string
+                      example: bf537cbc-61f4-11ed-9b6a-0242ac120002
+                    example:
+                      - bf537cbc-61f4-11ed-9b6a-0242ac120002
+                      - bf537e38-61f4-11ed-9b6a-0242ac120002
+                      - bf537faa-61f4-11ed-9b6a-0242ac120002
+              examples:
+                Successful Request:
+                  value:
+                    accountIdList:
+                      - bf537cbc-61f4-11ed-9b6a-0242ac120002
+                      - bf537e38-61f4-11ed-9b6a-0242ac120002
+                      - bf537faa-61f4-11ed-9b6a-0242ac120002
+    parameters:
+      - name: customerId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: '12340000'
+  /accounts/create:
+    post:
+      summary: Create Account
+      description: >-
+        Create an account for a customer. Make sure the required fields in the
+        request body are present before sending. You can verify information for
+        the customer through the `GET /customer` endpoint in the Customer API
+
+
+        ### Request body fields
+
+
+        | **Property** | **Description** | **Required?** |
+
+        | --- | --- | --- |
+
+        | Holder | The CustomerId of the account holder | Yes |
+
+        | Type | Account type: `BUSINESS_CHECKING`, `BUSINESS_SAVINGS`,
+        `PERSONAL_CHECKING`, `PERSONAL SAVINGS` | Yes |
+
+        | Currency | Preferred currency code | No |
+      operationId: createAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                holder:
+                  type: string
+                  example: '{{customerId}}'
+                type:
+                  type: string
+                  example: Personal Loan Account
+            examples:
+              Create Account:
+                value:
+                  holder: '{{customerId}}'
+                  type: Personal Loan Account
+      responses:
+        '200':
+          description: Account created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 5d215eb2-cff6-40ee-a309-b2cd7501bed1
+                  message:
+                    type: string
+                    example: Account created successfully
+              examples:
+                Account created successfully:
+                  value:
+                    id: 5d215eb2-cff6-40ee-a309-b2cd7501bed1
+                    message: Account created successfully
+components:
+  securitySchemes:
+      apiKey:
+        type: apiKey
+        name: x-api-key
+        in: header
+#security:
+#  - apiKey: []
+#tags:
+#  - name: Statement
+#    description: Get information about account statements.
