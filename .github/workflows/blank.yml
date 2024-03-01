@@ -1,0 +1,19 @@
+name: Automated API tests using Postman CLI
+
+on: push
+
+jobs:
+  automated-api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      - name: Run API tests
+        run: |
+          postman collection run "${{ github.workspace }}/postman/collections/Aperio Accounts TEST.json" -e "23889826-6862a04b-c690-49e1-8c11-b5ea26b24f8f" --integration-id "159106-${{ github.run_id }}"
+          # Lint your API using Postman CLI
+          # postman api lint e4abb2c8-e185-42c3-ad6a-b190a4b4d37e --integration-id 159106
