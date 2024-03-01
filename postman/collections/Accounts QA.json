@@ -572,6 +572,86 @@
 					"body": "{\n  \"balance\": {\n    \"available\": 109.58,\n    \"present\": 265.53\n  },\n  \"details\": {\n    \"domestic\": {\n      \"account\": \"34183769\",\n      \"routing\": \"69437301\"\n    },\n    \"international\": {\n      \"bic\": \"AAQIMWT1\",\n      \"iban\": \"{AL10010054848GYQ8536W4967Q3R}\"\n    }\n  },\n  \"interestRate\": 0.01,\n  \"lastStatementDate\": \"Tue Oct 10 2023 00:41:55 GMT-0500 (Central Daylight Time)\",\n  \"type\": \"Savings Account\"\n}"
 				}
 			]
+		},
+		{
+			"name": "Delete account",
+			"id": "0d0fa223-d25b-482c-80a2-7c8a94ca0207",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/plain"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/accounts/:accountNumber",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"accounts",
+						":accountNumber"
+					],
+					"variable": [
+						{
+							"key": "accountNumber",
+							"value": "abc123",
+							"description": "(Required) (Required)"
+						}
+					]
+				},
+				"description": "Delete an account"
+			},
+			"response": [
+				{
+					"id": "48de40e0-e0e4-4c8a-a1fb-530641c13c0f",
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							},
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "x-api-key",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/accounts/:accountNumber",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								":accountNumber"
+							],
+							"variable": [
+								{
+									"key": "accountNumber"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"value\": \"\"\n}"
+				}
+			]
 		}
 	],
 	"auth": {
@@ -598,7 +678,8 @@
 		{
 			"id": "66cc978b-0442-4886-bd85-334b381adfeb",
 			"key": "baseUrl",
-			"value": "https://9f784161-3a85-417e-9073-f48d348570fd.mock.pstmn.io"
+			"value": "https://9f784161-3a85-417e-9073-f48d348570fd.mock.pstmn.io",
+			"type": "string"
 		}
 	]
 }
