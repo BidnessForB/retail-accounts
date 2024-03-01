@@ -1,13 +1,13 @@
 openapi: 3.0.3
 info:
-  title: Accounts API
+  title: Accounts API about accounts
   
   description: >-
     Endpoints for frontend implementations when it comes to the account space.
 
 
     Responses can be visualized to give a clearer picture on what responses
-    provide.
+    provide. to these things
 
 
     Make sure to select the respective Environment file when making calls for
