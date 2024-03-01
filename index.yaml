@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Accounts API about accounts
+  title: Accounts API about accounts and other things
   
   description: >-
     Endpoints for frontend implementations when it comes to the account space.
