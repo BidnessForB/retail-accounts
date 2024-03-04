@@ -575,7 +575,7 @@
 		},
 		{
 			"name": "Delete account",
-			"id": "0d0fa223-d25b-482c-80a2-7c8a94ca0207",
+			"id": "d9134336-adae-4654-93a1-9474ace62f41",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -588,13 +588,15 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/accounts/:accountNumber",
+					"raw": "{{baseUrl}}/accounts/abc1234/statement/latest",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"accounts",
-						":accountNumber"
+						"abc1234",
+						"statement",
+						"latest"
 					],
 					"variable": [
 						{
@@ -608,7 +610,7 @@
 			},
 			"response": [
 				{
-					"id": "48de40e0-e0e4-4c8a-a1fb-530641c13c0f",
+					"id": "3ee7f48c-e776-40c0-9dd3-bee16643445d",
 					"name": "200 OK",
 					"originalRequest": {
 						"method": "DELETE",
@@ -624,18 +626,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/accounts/:accountNumber",
+							"raw": "{{baseUrl}}/accounts/abc1234/statement/latest",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"accounts",
-								":accountNumber"
-							],
-							"variable": [
-								{
-									"key": "accountNumber"
-								}
+								"abc1234",
+								"statement",
+								"latest"
 							]
 						}
 					},
