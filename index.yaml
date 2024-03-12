@@ -33,8 +33,7 @@ info:
   x-linked-collection: 23889826-1cbee4f0-2ffb-49ce-86bd-bf68301e3cfa
   x-postman-apiid: b54fc4ab-0e68-4b79-8e7d-6c1caa54e7be
 servers:
-  - url: https://48f1999a-8002-4c11-88d1-e60b0877c8c0.mock.pstmn.io
-  - url: https://c72cabe7-b557-4382-b253-bbf803856fd1.mock.pstmn.io
+  - url: https://9f784161-3a85-417e-9073-f48d348570fd.mock.pstmn.io
 paths:
   
   /accounts/abc1234/statement/latest:
