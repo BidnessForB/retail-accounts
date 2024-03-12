@@ -1,13 +1,12 @@
 openapi: 3.0.3
 info:
-  title: Accounts API about accounts and other things
-  
+  title: Accounts API
   description: >-
     Endpoints for frontend implementations when it comes to the account space.
 
 
     Responses can be visualized to give a clearer picture on what responses
-    provide. to these things
+    provide.
 
 
     Make sure to select the respective Environment file when making calls for
@@ -29,37 +28,16 @@ info:
     <img src="https://i.imgur.com/zQq3VNF.jpg" alt="Imgur">
   version: 1.0.0
   contact: {}
-  x-postman-schemaid: ccb34a28-3df7-4af3-9fca-35b020470112
-  x-source-collection: 23889826-2cd44de2-4272-41e5-a837-73f02bf9e889
-  x-linked-collection: 23889826-f991e9db-ed4c-42a2-bf42-23e435b24989
-  x-postman-apiid: f6e3de20-7690-431a-9a84-b775ffb891df
+  x-postman-schemaid: 18f99cd9-728a-47e3-8363-bde2daecc708
+  x-source-collection: 23889826-b5109b10-1d8d-406f-acfb-828b248e41c5
+  x-linked-collection: 23889826-1cbee4f0-2ffb-49ce-86bd-bf68301e3cfa
+  x-postman-apiid: b54fc4ab-0e68-4b79-8e7d-6c1caa54e7be
 servers:
-  - url: https://9f784161-3a85-417e-9073-f48d348570fd.mock.pstmn.io
+  - url: https://48f1999a-8002-4c11-88d1-e60b0877c8c0.mock.pstmn.io
   - url: https://c72cabe7-b557-4382-b253-bbf803856fd1.mock.pstmn.io
 paths:
+  
   /accounts/abc1234/statement/latest:
-    /accounts/{accountNumber}:
-    delete:
-      summary: Delete account
-      description: Delete an account
-      operationId: deleteAccount
-      responses:
-        '204':
-          description: 200 OK
-          content:
-            text/plain:
-              examples:
-                200 OK:
-                  value: ''
-    parameters:
-      - name: accountNumber
-        in: path
-        required: true
-        schema:
-          type: string
-          example: abc123
-        description: '(Required)'
-
     get:
       tags:
         - Statement
@@ -75,10 +53,11 @@ paths:
                 type: object
                 properties:
                   balance:
+                    description: The account balance
                     type: object
                     properties:
                       closing:
-                        description: The number
+                        description: The closing value
                         type: number
                         example: 979.96
                       opening:
@@ -91,7 +70,6 @@ paths:
                         type: number
                         example: 929.15
                       out:
-                        description: Foo bar
                         type: number
                         example: 286.06
                   period:
@@ -387,7 +365,7 @@ paths:
                     properties:
                       from:
                         type: string
-                        example: LI8070048VKD3G541990G
+                        example: MK0383607P93WT18330
                       to:
                         type: string
                         example: >-
@@ -496,7 +474,7 @@ paths:
                       in: 164.88
                       out: 579.77
                     period:
-                      from: LI8070048VKD3G541990G
+                      from: MK0383607P93WT18330
                       to: >-
                         Mon Oct 09 2023 11:34:41 GMT-0500 (Central Daylight
                         Time)
