@@ -82,6 +82,7 @@ paths:
                         type: number
                         example: 979.96
                       opening:
+                        description: This is the description
                         type: number
                         example: 335.77
                   money:
@@ -282,6 +283,7 @@ paths:
       operationId: date
       parameters:
         - name: accountNumber
+          description: THe account number
           in: query
           schema:
             type: string
