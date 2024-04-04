@@ -9,6 +9,7 @@ id = c5307bfe-2e24-441a-89a1-36a6e4c88489
 
 [config.relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"23889826-d7b5dc79-6c05-42e6-b973-ec3e95fd200e","path":"Cisco Accounts TEST.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Example\",\"folderStrategy\":\"Tags\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Example\",\"exampleParametersResolution\":\"Example\"}"}}
 
 [config.relations.collections.metaData]
 
