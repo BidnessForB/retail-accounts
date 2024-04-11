@@ -9,6 +9,7 @@ id = d244bb9c-6ef8-48e2-90bb-850dd9840d08
 
 [config.relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"23889826-54791c20-eadf-4567-8fa2-d79ecce62c51","path":"Agilent Accounts TEST.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Example\",\"folderStrategy\":\"Tags\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Example\",\"exampleParametersResolution\":\"Example\"}"}}
 
 [config.relations.collections.metaData]
 
