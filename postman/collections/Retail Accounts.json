@@ -1,0 +1,891 @@
+{
+	"info": {
+		"_postman_id": "fa9212a9-b08c-498d-abe0-3b2bc2fd116b",
+		"name": "Retail Accounts",
+		"description": "Endpoints for frontend implementations when it comes to the account space.\n\nResponses can be visualized to give a clearer picture on what responses provide.\n\nMake sure to select the respective Environment file when making calls for the Collection\n\n<img src=\"https://i.imgur.com/ymcwlzB.gif\" alt=\"Imgur\">\n\nReference image example here:\n\n<img src=\"https://i.imgur.com/WbEHxDz.jpg\" alt=\"Imgur\">\n\nand example of Date\n\n<img src=\"https://i.imgur.com/zQq3VNF.jpg\" alt=\"Imgur\">",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "23889826-fa9212a9-b08c-498d-abe0-3b2bc2fd116b"
+	},
+	"item": [
+		{
+			"name": "Statement",
+			"item": [
+				{
+					"name": "Latest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7d668623-cc4f-4f42-af15-c205f3afbf2b",
+								"exec": [
+									"pm.test(\"Response time is less than 700ms\", function () {",
+									"  pm.expect(pm.response.responseTime).to.be.below(700);",
+									"});",
+									"",
+									"let jsonResponse = pm.response.json();",
+									"",
+									"pm.test(\"Response should be a parsable JSON\", function() {",
+									"    pm.expect(jsonResponse).to.be.ok;",
+									"});",
+									"",
+									"pm.test(\"Response body should be an object\", function() {",
+									"    pm.expect(jsonResponse).to.be.an('object');",
+									"});",
+									"",
+									"",
+									"",
+									"var schema = {",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"period\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"from\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"to\": {",
+									"          \"type\": \"string\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"from\",",
+									"        \"to\"",
+									"      ]",
+									"    },",
+									"    \"balance\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"opening\": {",
+									"          \"type\": \"number\"",
+									"        },",
+									"        \"closing\": {",
+									"          \"type\": \"number\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"opening\",",
+									"        \"closing\"",
+									"      ]",
+									"    },",
+									"    \"money\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"in\": {",
+									"          \"type\": \"number\"",
+									"        },",
+									"        \"out\": {",
+									"          \"type\": \"number\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"in\",",
+									"        \"out\"",
+									"      ]",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"period\",",
+									"    \"balance\",",
+									"    \"money\"",
+									"  ]",
+									"}",
+									"",
+									"pm.test(\"Response body should be in the correct format\", function() {",
+									"  pm.response.to.have.jsonSchema (schema);",
+									"});",
+									"",
+									"const res = pm.response.json();",
+									"const template = `",
+									"    <style>",
+									"        .summary {",
+									"            border: 1px solid #f4f4f4; ",
+									"            border-radius: 5px; ",
+									"            overflow: hidden;",
+									"            margin: 10px; ",
+									"            background-color: #f4f4f4; ",
+									"    }",
+									"",
+									"    .summary > div {",
+									"        float: left;",
+									"        width: 50%;",
+									"        box-sizing: border-box;",
+									"        padding: 20px;",
+									"    }",
+									"",
+									"    ul {",
+									"        list-style: none;",
+									"        padding: 0;",
+									"    }",
+									"",
+									"    li {",
+									"        margin-bottom: 10px;",
+									"    }",
+									"    img.logo {",
+									"        height: 30%;",
+									"        width: 30%;",
+									"    }",
+									"",
+									"    </style>",
+									"    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css\">",
+									"    <script src=\"https://code.jquery.com/jquery-3.5.1.min.js\"></script>",
+									"    <script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>",
+									"    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js\"></script>",
+									"    <img class=\"logo\" src=\"https://github.com/postman-solutions-eng/finance_pmbank_backend_api/assets/20145532/cdb415d9-2331-46f7-b863-3a9e8a16b5e2\" />   ",
+									"    <div class=\"summary\">",
+									"        <div>",
+									"            <ul>",
+									"                <li><strong>Statement: </strong> {{res.period.from}}</li>",
+									"                <li><strong>Opening balance: </strong> \\${{res.balance.opening}}</li>",
+									"                <li><strong>Closing balance: </strong> \\${{res.balance.closing}}</li>",
+									"            </ul>",
+									"        </div>",
+									"        <div>",
+									"            <ul>",
+									"                <li><strong>Account: </strong> {{accountNumber}}</li>",
+									"                <li><strong>Money in: </strong> \\${{res.money.in}}</li>",
+									"                <li><strong>Money out: </strong> \\${{res.money.out}}</li>",
+									"            </ul>",
+									"        </div>",
+									"    </div>",
+									"    <div class=\"table\">",
+									"        <table class=\"hover stripe\">",
+									"            <thead>",
+									"                <tr>",
+									"                    <th>Date</th>",
+									"                    <th>Type</th>",
+									"                    <th>Description</th>",
+									"                    <th>Amount</th>",
+									"                    <th>Balance</th>",
+									"                </tr>",
+									"            </thead>",
+									"            <tbody>",
+									"            {{#each res.transactions}}",
+									"                <tr id=row_{{@key}}\">",
+									"                    <td id=date_{{@key}}>{{date}}</td>",
+									"                    <script type = \"text/JavaScript\">",
+									"                        var d = moment(\"{{date}}\").format('YYYY-MM-DD');;",
+									"                        document.getElementById(\"date_{{@key}}\").innerHTML = d;",
+									"                    </script>",
+									"                    <td>{{type}}</td>",
+									"                    <td>{{description}}</td>",
+									"                    <td>{{amount}}</td>",
+									"                    <td>{{balance}}</td>",
+									"                </tr>",
+									"            {{/each}}",
+									"            </tbody>",
+									"        </table>",
+									"    </div>",
+									"",
+									"    <script>",
+									"        $('table').DataTable()",
+									"    </script>",
+									"`",
+									"const accountNumber = pm.globals.get('accountNumber');",
+									"pm.visualizer.set(template, { res, accountNumber });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "abe1ad42-c10f-48c5-84aa-d6a67af4ca52",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "X-API-KEY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/accounts/{{accountNumber}}/statement/latest",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"{{accountNumber}}",
+								"statement",
+								"latest"
+							],
+							"variable": [
+								{
+									"key": "accountNumber",
+									"value": "abc123",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Use the Statement/Latest to see the account and balance of your user."
+					},
+					"response": [
+						{
+							"id": "1c474b91-27df-46ce-82b0-10b66f349f7b",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/accounts/{{accountNumber}}/statement/latest",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountNumber}}",
+										"statement",
+										"latest"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"period\": {\n        \"from\": \"Tue Apr 04 2023 04:37:12 GMT+0000 (Coordinated Universal Time)\",\n        \"to\": \"Mon Mar 11 2024 00:00:33 GMT+0000 (Coordinated Universal Time)\"\n    },\n    \"balance\": {\n        \"opening\": 335.77,\n        \"closing\": 979.96\n    },\n    \"money\": {\n        \"in\": 929.15,\n        \"out\": 286.06\n    },\n    \"transactions\": [\n        {\n            \"date\": \"Mon Oct 09 2023 18:38:56 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"McLaughlin, Rolfson and Mueller\",\n            \"type\": \"deposit\",\n            \"amount\": 402.81,\n            \"balance\": 871.61\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 13:11:29 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"DuBuque, Crist and Reilly\",\n            \"type\": \"withdrawal\",\n            \"amount\": 84.71,\n            \"balance\": 161.04\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 10:31:58 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Thiel - Turcotte\",\n            \"type\": \"payment\",\n            \"amount\": 428.64,\n            \"balance\": 307.55\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 12:07:32 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Reichel and Sons\",\n            \"type\": \"deposit\",\n            \"amount\": 432.84,\n            \"balance\": 964.86\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 16:33:45 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Gleason, Beatty and Erdman\",\n            \"type\": \"withdrawal\",\n            \"amount\": 693.52,\n            \"balance\": 631.20\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 18:01:47 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Lemke, Glover and Frami\",\n            \"type\": \"invoice\",\n            \"amount\": 486.91,\n            \"balance\": 865.38\n        },\n        {\n            \"date\": \"Tue Oct 10 2023 00:58:52 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Cartwright - O'Conner\",\n            \"type\": \"invoice\",\n            \"amount\": 42.23,\n            \"balance\": 272.76\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 16:46:21 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Adams and Sons\",\n            \"type\": \"payment\",\n            \"amount\": 231.86,\n            \"balance\": 959.10\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 22:40:25 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Harvey, Ferry and Bruen\",\n            \"type\": \"withdrawal\",\n            \"amount\": 540.18,\n            \"balance\": 726.10\n        },\n        {\n            \"date\": \"Tue Oct 10 2023 06:14:08 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Altenwerth, Rath and Hammes\",\n            \"type\": \"payment\",\n            \"amount\": 565.76,\n            \"balance\": 922.80\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c11ec74-8ab3-4732-8ab1-312babce3541",
+								"exec": [
+									"pm.test(\"Response time is less than 700ms\", function () {",
+									"  pm.expect(pm.response.responseTime).to.be.below(700);",
+									"});",
+									"",
+									"let jsonResponse = pm.response.json();",
+									"",
+									"pm.test(\"Response should be a parsable JSON\", function() {",
+									"    pm.expect(jsonResponse).to.be.ok;",
+									"});",
+									"",
+									"pm.test(\"Response body should be an object\", function() {",
+									"    pm.expect(jsonResponse).to.be.an('object');",
+									"});",
+									"",
+									"",
+									"",
+									"var schema = {",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"period\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"from\": {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        \"to\": {",
+									"          \"type\": \"string\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"from\",",
+									"        \"to\"",
+									"      ]",
+									"    },",
+									"    \"balance\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"opening\": {",
+									"          \"type\": \"number\"",
+									"        },",
+									"        \"closing\": {",
+									"          \"type\": \"number\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"opening\",",
+									"        \"closing\"",
+									"      ]",
+									"    },",
+									"    \"money\": {",
+									"      \"type\": \"object\",",
+									"      \"properties\": {",
+									"        \"in\": {",
+									"          \"type\": \"number\"",
+									"        },",
+									"        \"out\": {",
+									"          \"type\": \"number\"",
+									"        }",
+									"      },",
+									"      \"required\": [",
+									"        \"in\",",
+									"        \"out\"",
+									"      ]",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"period\",",
+									"    \"balance\",",
+									"    \"money\"",
+									"  ]",
+									"}",
+									"",
+									"pm.test(\"Response body should be in the correct format\", function() {",
+									"  pm.response.to.have.jsonSchema (schema);",
+									"});",
+									"",
+									"const res = pm.response.json();",
+									"const template = `",
+									"    <style>",
+									"        .summary {",
+									"            border: 1px solid #f4f4f4; ",
+									"            border-radius: 5px; ",
+									"            overflow: hidden;",
+									"            margin: 10px; ",
+									"            background-color: #f4f4f4; ",
+									"    }",
+									"",
+									"    .summary > div {",
+									"        float: left;",
+									"        width: 50%;",
+									"        box-sizing: border-box;",
+									"        padding: 20px;",
+									"    }",
+									"",
+									"    ul {",
+									"        list-style: none;",
+									"        padding: 0;",
+									"    }",
+									"",
+									"    li {",
+									"        margin-bottom: 10px;",
+									"    }",
+									"    img.logo {",
+									"        height: 30%;",
+									"        width: 30%;",
+									"    }",
+									"",
+									"    </style>",
+									"    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css\">",
+									"    <script src=\"https://code.jquery.com/jquery-3.5.1.min.js\"></script>",
+									"    <script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>",
+									"    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js\"></script>",
+									"    <img class=\"logo\" src=\"https://github.com/postman-solutions-eng/finance_pmbank_backend_api/assets/20145532/cdb415d9-2331-46f7-b863-3a9e8a16b5e2\" />   ",
+									"    <div class=\"summary\">",
+									"        <div>",
+									"            <ul>",
+									"                <li><strong>Statement: </strong> {{res.period.from}}</li>",
+									"                <li><strong>Opening balance: </strong> \\${{res.balance.opening}}</li>",
+									"                <li><strong>Closing balance: </strong> \\${{res.balance.closing}}</li>",
+									"            </ul>",
+									"        </div>",
+									"        <div>",
+									"            <ul>",
+									"                <li><strong>Account: </strong> {{accountNumber}}</li>",
+									"                <li><strong>Money in: </strong> \\${{res.money.in}}</li>",
+									"                <li><strong>Money out: </strong> \\${{res.money.out}}</li>",
+									"            </ul>",
+									"        </div>",
+									"    </div>",
+									"    <div class=\"table\">",
+									"        <table class=\"hover stripe\">",
+									"            <thead>",
+									"                <tr>",
+									"                    <th>Date</th>",
+									"                    <th>Type</th>",
+									"                    <th>Description</th>",
+									"                    <th>Amount</th>",
+									"                    <th>Balance</th>",
+									"                </tr>",
+									"            </thead>",
+									"            <tbody>",
+									"            {{#each res.transactions}}",
+									"                <tr id=row_{{@key}}\">",
+									"                    <td id=date_{{@key}}>{{date}}</td>",
+									"                    <script type = \"text/JavaScript\">",
+									"                        var d = moment(\"{{date}}\").format('YYYY-MM-DD');;",
+									"                        document.getElementById(\"date_{{@key}}\").innerHTML = d;",
+									"                    </script>",
+									"                    <td>{{type}}</td>",
+									"                    <td>{{description}}</td>",
+									"                    <td>{{amount}}</td>",
+									"                    <td>{{balance}}</td>",
+									"                </tr>",
+									"            {{/each}}",
+									"            </tbody>",
+									"        </table>",
+									"    </div>",
+									"",
+									"    <script>",
+									"        $('table').DataTable()",
+									"    </script>",
+									"`",
+									"const accountNumber = pm.globals.get('accountNumber');",
+									"pm.visualizer.set(template, { res, accountNumber });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "67e4c642-bff0-4768-ab44-cd3a7343754c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "e1cec8e0-c812-488b-bb02-5fc38b054575",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "X-API-KEY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "from",
+									"value": "Wed Jan 11 2023 00:50:06 GMT-0600 (Central Standard Time)",
+									"type": "text"
+								},
+								{
+									"key": "to",
+									"value": "Mon Oct 09 2023 11:06:39 GMT-0500 (Central Daylight Time)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/accounts/{{accountNumber}}/statement/date?accountNumber=123ABC",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"{{accountNumber}}",
+								"statement",
+								"date"
+							],
+							"query": [
+								{
+									"key": "accountNumber",
+									"value": "123ABC"
+								}
+							]
+						},
+						"description": "Use the statement/date endpoint to retrieve the dates of the transactions"
+					},
+					"response": [
+						{
+							"id": "84151243-ecca-47c9-999b-5b28c17366ef",
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/accounts/{{accountNumber}}/statement/date",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"accounts",
+										"{{accountNumber}}",
+										"statement",
+										"date"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Jun 2021 14:30:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=d33d68b932344fce"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=210e5b055e5bd71e"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "120"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "119"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1623681083"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"96-S/5iQ2y1qqIInh5BwoPc+chvDJU\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"period\": {\n        \"from\": \"Sun Oct 01 2023 11:34:41 GMT-0500 (Central Daylight Time)\",\n        \"to\": \"Mon Oct 09 2023 11:34:41 GMT-0500 (Central Daylight Time)\"\n    },\n    \"balance\": {\n        \"opening\": \"{{$randomBankAccountIban}}\",\n        \"closing\": 24.57\n    },\n    \"money\": {\n        \"in\": 164.88,\n        \"out\": 579.77\n    },\n    \"transactions\": [\n        {\n            \"date\": \"Mon Oct 09 2023 13:52:40 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"MacGyver LLC\",\n            \"type\": \"invoice\",\n            \"amount\": 717.65,\n            \"balance\": 137.07\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 16:27:31 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Beatty, Paucek and Gulgowski\",\n            \"type\": \"payment\",\n            \"amount\": 548.43,\n            \"balance\": 153.57\n        },\n        {\n            \"date\": \"Tue Oct 10 2023 01:11:40 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Baumbach - Feest\",\n            \"type\": \"payment\",\n            \"amount\": 141.57,\n            \"balance\": 621.31\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 22:04:53 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Witting and Sons\",\n            \"type\": \"payment\",\n            \"amount\": 961.64,\n            \"balance\": 673.77\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 18:18:37 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Hoeger and Sons\",\n            \"type\": \"invoice\",\n            \"amount\": 283.83,\n            \"balance\": 431.27\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 15:10:26 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Collins - Rau\",\n            \"type\": \"withdrawal\",\n            \"amount\": 533.98,\n            \"balance\": 497.56\n        },\n        {\n            \"date\": \"Mon Oct 09 2023 11:17:16 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Dickens, Goodwin and Swaniawski\",\n            \"type\": \"deposit\",\n            \"amount\": 311.25,\n            \"balance\": 309.01\n        },\n        {\n            \"date\": \"Tue Oct 10 2023 07:51:59 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Kemmer - Simonis\",\n            \"type\": \"deposit\",\n            \"amount\": 70.13,\n            \"balance\": 510.07\n        },\n        {\n            \"date\": \"Tue Oct 10 2023 05:18:37 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Johnston Inc\",\n            \"type\": \"invoice\",\n            \"amount\": 516.64,\n            \"balance\": 85.61\n        },\n        {\n            \"date\": \"Tue Oct 10 2023 01:58:56 GMT-0500 (Central Daylight Time)\",\n            \"description\": \"Gulgowski LLC\",\n            \"type\": \"withdrawal\",\n            \"amount\": 236.84,\n            \"balance\": 451.95\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"id": "6f9c1e20-adc4-4739-97fa-af7c3c6b4a43"
+		},
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3dfd819e-043b-4e5b-a9c3-3276954d5d33",
+						"exec": [
+							"const res = pm.response.json();",
+							"",
+							"",
+							"/*pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});*/",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "1f23fa0f-004b-49f5-8f0e-4cd82c0f2dc2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"Investment Account\",\n    \"holder\": \"{{customerId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://c72cabe7-b557-4382-b253-bbf803856fd1.mock.pstmn.io/accounts/create",
+					"protocol": "https",
+					"host": [
+						"c72cabe7-b557-4382-b253-bbf803856fd1",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"accounts",
+						"create"
+					]
+				},
+				"description": "Hi everyone."
+			},
+			"response": [
+				{
+					"id": "1e830c60-f95e-4f4d-a104-9546f280f482",
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"Savings Account\",\n    \"holder\": {\n        \"name\": {\n            \"first\": \"Leta\",\n            \"middle\": \"Bradly\",\n            \"last\": \"Dickinson\"\n        },\n        \"dob\": \"Wed Mar 15 2023 10:33:20 GMT-0500 (Central Daylight Time)\",\n        \"address\": {\n            \"street\": \"3475 King Mill\",\n            \"city\": \"Hickleton\",\n            \"country\": \"Saint Vincent and the Grenadines\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/accounts/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"Investment Account\",\n    \"details\": {\n        \"domestic\": {\n            \"account\": \"02560233\",\n            \"routing\": \"71993962\"\n        },\n        \"international\": {\n            \"bic\": \"PYAUISI1\",\n            \"iban\": \"AT780032406410040055\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Overview",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const template = `",
+							"    <style>",
+							"        .account-overview {",
+							"            width: 80%;",
+							"            margin: 0 auto;",
+							"            border: 1px solid black;",
+							"            padding: 10px;",
+							"        }",
+							"",
+							"        .account-overview div {",
+							"            display: inline-block;",
+							"            width: 31%;",
+							"            background: #efefef;",
+							"            padding: 20px;",
+							"            box-sizing: border-box;",
+							"            margin-right: 10px;",
+							"        }",
+							"",
+							"        .account-overview p {",
+							"            line-height: 0px;",
+							"            word-wrap: wrap;",
+							"        }",
+							"",
+							"        .account-overview ul {",
+							"            list-style-type: none;",
+							"        }",
+							"    </style>",
+							"    <div class=\"account-overview\">",
+							"        <h3>PM Bank</h3>",
+							"        <ul>",
+							"            <li><strong>Account type:</strong> {{res.type}}</li>",
+							"            <li><strong>Interest rate:</strong> {{res.interestRate}}%</li>",
+							"            <li><strong>Last statement date:</strong> {{res.lastStatementDate}}</li>",
+							"        </ul>",
+							"        <div>",
+							"            <h5>Balance</h5>",
+							"            <p><strong>Available:</strong> \\${{res.balance.available}}</p>",
+							"            <p><strong>Present:</strong> \\${{res.balance.present}}</p>",
+							"        </div>",
+							"        <div>",
+							"            <h5>Domestic details</h5>",
+							"            <p><strong>Account No:</strong> {{res.details.domestic.account}}</p>",
+							"            <p><strong>Routing No:</strong> {{res.details.domestic.routing}}</p>",
+							"        </div>",
+							"        <div>",
+							"            <h5>Intl details</h5>",
+							"            <p><strong>BIC:</strong> {{res.details.international.bic}}</p>",
+							"            <p><strong>IBAN:</strong> {{res.details.international.bic}}</p>",
+							"        </div>",
+							"    </div>",
+							"",
+							"",
+							"`",
+							"pm.visualizer.set(template, { res });"
+						],
+						"type": "text/javascript",
+						"id": "ebf91a73-006c-4e61-ba67-a9bcc7777a9b"
+					}
+				}
+			],
+			"id": "d3fd226b-e913-446c-adab-91fae5ce9c4c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/accounts/{{accountNumber}}/overview",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"accounts",
+						"{{accountNumber}}",
+						"overview"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "5ec5a822-824b-47d5-ad4c-a6f186359fe8",
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/accounts/{{accountNumber}}/overview",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"{{accountNumber}}",
+								"overview"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"Savings Account\",\n    \"balance\": {\n        \"available\": 109.58,\n        \"present\": 265.53\n    },\n    \"details\": {\n        \"domestic\": {\n            \"account\": \"34183769\",\n            \"routing\": \"69437301\"\n        },\n        \"international\": {\n            \"bic\": \"AAQIMWT1\",\n            \"iban\": \"{AL10010054848GYQ8536W4967Q3R}\"\n        }\n    },\n    \"interestRate\": 0.01,\n    \"lastStatementDate\": \"Tue Oct 10 2023 00:41:55 GMT-0500 (Central Daylight Time)\"\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{myAPIKey}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "x-api-key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1136c1ea-7367-4acc-a9c4-a83c597742e1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1744483a-e24e-486e-ba2b-86ce2f21a387",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "9ea82375-04d1-4011-a76b-aecfea9d80f6",
+			"key": "accountNumber",
+			"value": "abc1234",
+			"type": "string"
+		},
+		{
+			"id": "f5d7c694-0cc2-4160-89f8-7bba0eebf912",
+			"key": "myAPIKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "e13b571d-e341-4456-a93b-7775e3348c97",
+			"key": "url",
+			"value": "https://782d1315-241c-4361-a83d-767ddfa201c6.mock.pstmn.io",
+			"type": "string"
+		}
+	]
+}
