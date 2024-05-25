@@ -1,9 +1,9 @@
-name: Automated API tests using Postman CLI
+name: API Contract Tests
 
 on: push
 
 jobs:
-  automated-api-tests:
+  :
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
