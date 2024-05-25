@@ -1,9 +1,9 @@
-name: API Contract Tests
+name: API Linting
 
 on: push
 
 jobs:
-  :
+  api-linting:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
