@@ -9,6 +9,7 @@ id = ef49389e-98f9-4a53-89cc-0106eedc37de
 
 [config.relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"23889826-f7bcb64a-25c7-438d-b6d9-341cf3afabe5","path":"Linked Accounts Collection.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Example\",\"folderStrategy\":\"Tags\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Example\",\"exampleParametersResolution\":\"Example\"}"}}
 
 [config.relations.collections.metaData]
 
