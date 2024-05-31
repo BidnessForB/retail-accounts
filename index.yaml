@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Retail Accounts API for Agilent people
+  title: Retail Accounts API for Jewelers
   description: >-
     Endpoints for frontend implementations when it comes to the account space.
 
