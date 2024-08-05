@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Retail Accounts API for Jewelers
+  title: Retail Accounts API
   description: >-
     Endpoints for frontend implementations when it comes to the account space.
 
@@ -33,7 +33,7 @@ info:
   x-linked-collection: 23889826-1cbee4f0-2ffb-49ce-86bd-bf68301e3cfa
   x-postman-apiid: b54fc4ab-0e68-4b79-8e7d-6c1caa54e7be
 servers:
-  - url: https://e59c2fb8-9fcf-414f-b332-42246e9f811d.mock.pstmn.io
+  - url: https://253782b5-0ea0-4ccd-a7a3-6c5d644c76b7.mock.pstmn.io
 paths:
   /accounts/{accountNumber}:
     delete:
