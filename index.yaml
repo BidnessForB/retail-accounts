@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Retail Accounts API
+  title: Retail Accounts API for Jewelers
   description: >-
     Endpoints for frontend implementations when it comes to the account space.
 
@@ -33,44 +33,16 @@ info:
   x-linked-collection: 23889826-1cbee4f0-2ffb-49ce-86bd-bf68301e3cfa
   x-postman-apiid: b54fc4ab-0e68-4b79-8e7d-6c1caa54e7be
 servers:
-  - url: https://b2189b36-046f-49ea-8c39-613bdb0d4f1e.mock.pstmn.io
+  - url: https://db3a2b48-7a7d-4cd4-8c67-8f109a6b05f8.mock.pstmn.io
 paths:
-  /accounts/{accountNumber}:
-    delete:
-      summary: Delete account
-      description: Delete an account
-      operationId: deleteAccount
-      responses:
-        '204':
-          description: 200 OK
-          content:
-            text/plain:
-              examples:
-                200 OK:
-                  value: ''
-    parameters:
-      - name: accountNumber
-        in: path
-        required: true
-        schema:
-          type: string
-          example: abc123
-        description: '(Required)'
-
-  /accounts/{accountNumber}/statement/latest:
+  
+  /accounts/abc1234/statement/latest:
     get:
       tags:
         - Statement
       summary: Latest
       description: Use the Statement/Latest to see the account and balance of your user.
       operationId: latest
-      parameters:
-        - name: accountNumber
-          in: path
-          required: true
-          schema:
-            type: string
-            example: 123ABC
       responses:
         '200':
           description: 200 OK
@@ -277,7 +249,7 @@ paths:
                           Time)
                         description: Altenwerth, Rath and Hammes
                         type: payment
-  /accounts/{accountNumber}/statement/date:
+  /accounts/abc1234/statement/date:
     get:
       tags:
         - Statement
@@ -288,8 +260,7 @@ paths:
       operationId: date
       parameters:
         - name: accountNumber
-          in: path
-          required: true
+          in: query
           schema:
             type: string
             example: 123ABC
@@ -681,18 +652,11 @@ paths:
                         bic: PYAUISI1
                         iban: AT780032406410040055
                     type: Investment Account
-  /accounts/{accountNumber}/overview:
+  /accounts/abc1234/overview:
     get:
       summary: Overview
       description: Overview
       operationId: overview
-      parameters:
-        - name: accountNumber
-          in: path
-          required: true
-          schema:
-            type: string
-            example: 123ABC
       responses:
         '200':
           description: 200 OK
