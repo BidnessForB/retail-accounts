@@ -1,0 +1,19 @@
+name: Convert Collection to OAS
+
+on: workflow_dispatch
+    
+
+jobs:
+  automated-contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      - name: Convert collection to OAS
+        run: |
+          postman collection run 34829850-014ef3cd-c17a-45a3-8f2c-f0a46ca71ace
+          
