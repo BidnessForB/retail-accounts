@@ -15,5 +15,5 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Convert collection to OAS
         run: |
-          postman collection run 34829850-014ef3cd-c17a-45a3-8f2c-f0a46ca71ace -e cfg_postmanAPIKey=${{ secrets.POSTMAN_API_KEY }}
+          postman collection run 34829850-014ef3cd-c17a-45a3-8f2c-f0a46ca71ace --env-var cfg_postmanAPIKey=${{ secrets.POSTMAN_API_KEY }}
           
