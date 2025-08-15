@@ -1,6 +1,8 @@
 name: API Linting
 
-on: push
+on: 
+  - push
+  - workflow_dispatch
 
 jobs:
   api-linting:
